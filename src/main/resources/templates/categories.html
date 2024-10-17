@@ -1,26 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Categories</title>
 </head>
 <body>
-<h1>Categories</h1>
+<h1>Categories Page</h1>
+
+<h3>
+    Categories:
+</h3>
+
 <ul>
-  <li th:each="category: ${categories}" th:text="${category.getName()}"></li>
+    <li th:each="category: ${categories}" th:text="${category.name} + ' (' + ${category.description} + ')'"></li>
 </ul>
 
-<form th:action="@{/servlet/category2}" th:method="POST">
-    <label>
-        Name
-        <input type="text" name="name">
-    </label>
-    <br>
-    <label>
-        Description
-        <input type="text" name="desc">
-    </label>
-    <input type="submit" name="submit" id="submit" value="submit">
-</form>
+<div>
+    <h3>
+        Enter new category
+    </h3>
+
+    <form th:action="@{/servlet/category2}" th:method="POST">
+        <label>
+            Name
+            <input type="text" name="name" />
+        </label>
+
+        <br />
+
+        <label>
+            Description
+            <input type="text" name="desc" />
+        </label>
+
+        <br />
+
+        <button type="submit">
+            Add
+        </button>
+    </form>
+</div>
 </body>
 </html>
