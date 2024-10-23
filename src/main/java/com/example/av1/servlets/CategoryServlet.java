@@ -32,10 +32,12 @@ public class CategoryServlet extends HttpServlet {
         WebContext webContext = new WebContext(webExchange);
 
         String clientAgent = req.getHeader("user-agent");
-
+        User user = (User)req.getSession().getAttribute("user");
 
         webContext.setVariable("categories", categoryService.listCategories());
         webContext.setVariable("clientAgent", clientAgent);
+        webContext.setVariable("name", user.getName());
+        webContext.setVariable("surname", user.getSurname());
 
         springTemplateEngine.process("categories.html", webContext, resp.getWriter());
     }
