@@ -1,6 +1,7 @@
 package com.example.av1.servlets;
 
 import com.example.av1.Service.CategoryService;
+import com.example.av1.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,7 +31,11 @@ public class CategoryServlet extends HttpServlet {
                 .buildExchange(req, resp);
         WebContext webContext = new WebContext(webExchange);
 
+        String clientAgent = req.getHeader("user-agent");
+
+
         webContext.setVariable("categories", categoryService.listCategories());
+        webContext.setVariable("clientAgent", clientAgent);
 
         springTemplateEngine.process("categories.html", webContext, resp.getWriter());
     }
