@@ -1,16 +1,17 @@
 package com.example.av1.web.filter;
 
+import com.example.av1.Service.AuthenticationService;
 import com.example.av1.model.User;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.context.annotation.ComponentScan;
 
 import java.io.IOException;
 
 @WebFilter
 public class LoginFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
@@ -24,10 +25,12 @@ public class LoginFilter implements Filter {
 
         User user = (User) req.getSession().getAttribute("user");
 
-        if(user == null && !((HttpServletRequest) servletRequest).getServletPath().contains("/login")){
-            resp.sendRedirect("/login");
-        }else{
+        if (user != null
+                || ((HttpServletRequest) servletRequest).getServletPath().contains("/login")
+                || ((HttpServletRequest) servletRequest).getServletPath().contains("/register") ) {
             filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            resp.sendRedirect("/login");
         }
     }
 
