@@ -9,6 +9,7 @@
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -49,7 +50,7 @@
 </head>
 <body>
 
-<div class="login-container">
+<div class="login-container" style="display: flex; flex-direction: column">
   <h2>Login</h2>
   <form th:action="@{/login}" th:method="POST">
     <input type="text" name="username" placeholder="Username" required>
@@ -58,7 +59,7 @@
   </form>
 </div>
 <div th:if="${login_failed}">
-  <div th:text="${error_message}"></div>
+  <div style="color: red" th:text="${error_message}"></div>
 </div>
 </body>
 </html>

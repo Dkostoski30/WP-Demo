@@ -1,4 +1,4 @@
-package com.example.av1.servlets;
+package com.example.av1.web.servlets;
 
 import com.example.av1.Service.AuthenticationService;
 import com.example.av1.model.User;
@@ -54,6 +54,6 @@ public class LoginServlet extends HttpServlet {
             templateEngine.process("login.html", webContext, resp.getWriter());
         }
         req.getSession().setAttribute("user", user);
-        resp.sendRedirect("/servlet/category2");
+        resp.sendRedirect("/servlets/category2");
     }
 }

@@ -1,4 +1,4 @@
-package com.example.av1.servlets;
+package com.example.av1.web.servlets;
 
 import com.example.av1.Service.CategoryService;
 import com.example.av1.model.User;
@@ -14,7 +14,8 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(name = "CategoryServlet", urlPatterns = "/servlet/category2")
+
+@WebServlet(name = "CategoryServlet", urlPatterns = "/servlets/category2")
 public class CategoryServlet extends HttpServlet {
     private final CategoryService categoryService;
     private final SpringTemplateEngine springTemplateEngine;
@@ -25,7 +26,8 @@ public class CategoryServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         IWebExchange webExchange = JakartaServletWebApplication
                 .buildApplication(getServletContext())
                 .buildExchange(req, resp);
@@ -36,8 +38,8 @@ public class CategoryServlet extends HttpServlet {
 
         webContext.setVariable("categories", categoryService.listCategories());
         webContext.setVariable("clientAgent", clientAgent);
-        webContext.setVariable("name", user.getName());
-        webContext.setVariable("surname", user.getSurname());
+        webContext.setVariable("name", "");
+        webContext.setVariable("surname", "");
 
         springTemplateEngine.process("categories.html", webContext, resp.getWriter());
     }
